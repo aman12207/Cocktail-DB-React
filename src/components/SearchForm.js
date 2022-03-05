@@ -21,7 +21,7 @@ const SearchForm = () => {
             <label htmlFor="name">search your favorite cocktail</label>
             {/* There are two ways of fetching data from api after change in input value both are working fine we can use any of them  */}
             {/* <input onChange={(e)=>setSearchTerm(e.target.value)} ref={searchValue} type="text" name="name" id="name"/> */}
-            <input onChange={searchCocktail} ref={searchValue} type="text" name="name" id="name"/>
+            <input onChange={searchCocktail} ref={searchValue} type="text" name="name" id="name" autoComplete='off'/>
           </div>
         </form>
       </section>

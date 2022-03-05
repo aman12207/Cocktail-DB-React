@@ -8,54 +8,54 @@ const SingleCocktail = () => {
   const [cocktail,setCocktail] = useState(null);
   const {id} = useParams();
   const fetchData = async() =>{
-    const response = await fetch(`${url}${id}`)
-    const {drinks} = await response.json();
-    if(drinks)
-    {
-      const {
-        strDrink: name,
-        strDrinkThumb: image,
-        strAlcoholic: info,
-        strCategory: category,
-        strGlass: glass,
-        strInstructions: instructions,
-        strIngredient1,
-        strIngredient2,
-        strIngredient3,
-        strIngredient4,
-        strIngredient5,
-      } = drinks[0]
-      const ingredients = [
-        strIngredient1,
-        strIngredient2,
-        strIngredient3,
-        strIngredient4,
-        strIngredient5,
-      ]
-      const newCocktail = {
-        name,
-        image,
-        info,
-        category,
-        glass,
-        instructions,
-        ingredients,
+    setLoading(true);
+    try {
+      const response = await fetch(`${url}${id}`)
+      const {drinks} = await response.json();
+      if(drinks){
+        const {
+          strDrink: name,
+          strDrinkThumb: image,
+          strAlcoholic: info,
+          strCategory: category,
+          strGlass: glass,
+          strInstructions: instructions,
+          strIngredient1,
+          strIngredient2,
+          strIngredient3,
+          strIngredient4,
+          strIngredient5,
+        } = drinks[0]
+        const ingredients = [
+          strIngredient1,
+          strIngredient2,
+          strIngredient3,
+          strIngredient4,
+          strIngredient5,
+        ]
+        const newCocktail = {
+          name,
+          image,
+          info,
+          category,
+          glass,
+          instructions,
+          ingredients,
+        }
+        setCocktail(newCocktail);
       }
-      setCocktail(newCocktail);
+      else {
+        setCocktail(null);
+      }
+    } catch (error) {
+      console.log(error)
     }
-    else 
-      setCocktail(null)
+    setLoading(false);
     // console.log(drinks)
   }
   useEffect(() => {
-    setLoading(true);
-    try {
       fetchData();
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  }, [])
+  }, [id])
   
   if(loading){
     return <Loading/>
