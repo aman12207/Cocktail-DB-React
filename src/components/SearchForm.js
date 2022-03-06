@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useGlobalContext } from '../context'
 
 const SearchForm = () => {
-  const {setSearchTerm} = useGlobalContext();
+  const {setSearchTerm,searchTerm} = useGlobalContext();
   const searchValue = useRef();
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -21,7 +21,7 @@ const SearchForm = () => {
             <label htmlFor="name">search your favorite cocktail</label>
             {/* There are two ways of fetching data from api after change in input value both are working fine we can use any of them  */}
             {/* <input onChange={(e)=>setSearchTerm(e.target.value)} ref={searchValue} type="text" name="name" id="name"/> */}
-            <input onChange={searchCocktail} ref={searchValue} type="text" name="name" id="name" autoComplete='off'/>
+            <input onChange={searchCocktail} ref={searchValue} type="text" name="name" id="name" value = {searchTerm} autoComplete='off'/>
           </div>
         </form>
       </section>
